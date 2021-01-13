@@ -41,6 +41,17 @@ class LoginForm extends React.Component<ILoginProps, ILoginState> {
     });
   }
 
+handleClick = (event: any) => {
+    window.ReactNativeWebView.postMessage(JSON.stringify({'data': 'Tirthak'}));
+  };
+  componentDidMount()
+  {
+    document.addEventListener("message", function(event:any) {
+      alert(event.data);
+     })
+  };
+
+
   handleSubmit = () => {
     LoginUser(this.state)
       .then(async ({ data }) => {
@@ -99,6 +110,15 @@ class LoginForm extends React.Component<ILoginProps, ILoginState> {
           onClick={this.handleSubmit}
         >
           Login
+        </Button>
+        
+         <Button
+          size="lg"
+          className="bg-gradient-theme-left border-0"
+          block
+          onClick={this.handleClick}
+        >
+          Click Me
         </Button>
         {children}
       </Form>
